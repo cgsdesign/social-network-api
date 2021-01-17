@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Thought } = require('../models');
 
 
 const userController = {
@@ -71,10 +71,49 @@ const userController = {
             res.status(404).json({ message: 'No user found with this id!' });
             return;
             }
-            res.json(dbUserData);
+            return Thought.deleteMany(
+              {_id: {$in: dbUserData.thoughtId }}
+            )
+            //res.json(dbUserData);
         })
         .catch(err => res.status(400).json(err));
-    }
+    },
+    //-----------------------_FRIENDS
+    //--------------------add friend---------------------------//
+    addFriend({ params, body }, res) {
+      User.findOneAndUpdate(
+        { _id: params.userId },
+        { $push: { friends: body } },
+        { new: true }
+      )
+        .then(dbUserData => {
+          if (!dbUserData) {
+            res.status(404).json({ message: 'No user found with this id!' });
+            return;
+          }
+          res.json(dbUserData);
+        })
+        .catch(err => res.json(err));
+    },
+
+//----------------------remove reaction----------------------------//
+    // remove reply
+    removeFriend({ params }, res) {
+        User.findOneAndUpdate(
+          { _id: params.userId },
+          { $pull: { friends:  params.friendId  } },
+          //$pull removes all that match query
+          { new: true
+          }
+        )
+          .then(dbData => res.json(dbData))
+          .catch(err => res.json(err));
+      }
+
+
+
+
+
 
   }
 
