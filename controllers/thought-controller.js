@@ -55,7 +55,7 @@ const thoughtController = {
     //----------------------- remove thought
       removeThought({ params }, res) {
         Thought.findOneAndDelete({ _id: params.id })
-        //when delete also sends back data it dekleted thus why .then(deletedComment => works
+        //when delete also sends back data it deleted thus why .then(deletedComment => works
           .then(deletedThought => {
             if (!deletedThought) {
               return res.status(404).json({ message: 'No thought with this id!' });

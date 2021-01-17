@@ -28,8 +28,11 @@ router
 
 // POST /api/thought/:thoughtid/reactions
 router
-.route('/:thoughtId/reactions/:reactionId')
-.put(addReaction)
+.route('/:thoughtId/reaction')
+.put(addReaction);
+
+router
+.route('/:thoughtId/reaction/:reactionId')
 .delete(removeReaction);
 
 // DELETE at /api/thought/:thoughtid/reactions/reactionId
