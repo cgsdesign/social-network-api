@@ -35,16 +35,16 @@ const thoughtController = {
         console.log(body);
         Thought.create(body)
           .then(({ _id }) => {
-            User.findOneAndUpdate(
-              { username: body.username },// .username becasue references User model
+            return User.findOneAndUpdate(
+              { username: body.username },// .username because references User model
               { $push: { thoughts: _id } },
-              { new: true }
+              { new: true },
+              res.json({thoughts: _id})
             )
-            return body;
 
           })
-          .then(dbUserData => {
-            if (!dbUserData) {
+          .then(dbData => {
+            if (!dbData) {
               res.status(404).json({ message: 'No thought found with this id!' });
               return;
             }
