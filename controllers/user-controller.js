@@ -71,10 +71,10 @@ const userController = {
             res.status(404).json({ message: 'No user found with this id!' });
             return;
             }
-            return Thought.deleteMany(
+            Thought.deleteMany(
               {_id: {$in: dbUserData.thoughtId }}
             )
-            //res.json(dbUserData);
+            return res.json(dbUserData);
         })
         .catch(err => res.status(400).json(err));
     },

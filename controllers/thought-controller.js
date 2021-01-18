@@ -38,8 +38,7 @@ const thoughtController = {
             return User.findOneAndUpdate(
               { username: body.username },// .username because references User model
               { $push: { thoughts: _id } },
-              { new: true },
-              res.json({thoughts: _id})
+              { new: true }
             )
 
           })
@@ -48,7 +47,7 @@ const thoughtController = {
               res.status(404).json({ message: 'No thought found with this id!' });
               return;
             }
-            res.json(dbUserData);
+            res.json(dbData);
           })
           .catch(err => res.json(err));
       },
@@ -110,14 +109,16 @@ updateThought({ params, body }, res) {
       removeReaction({ params }, res) {
           Thought.findOneAndUpdate(
             { _id: params.thoughtId },
-            { $pull: { reactions: { reactionId: params.reactionId } } },
+            { $pull: { reactions: params.reactionId } },
             //$pull removes all that match query
-            { new: true
+            { new: true,
+              remove: true
             }
           )
             .then(dbData => res.json(dbData))
             .catch(err => res.json(err));
         }
+
 };
 
 module.exports = thoughtController;

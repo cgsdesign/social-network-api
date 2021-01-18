@@ -51,8 +51,7 @@ const ThoughtSchema = new Schema(
         default: Date.now,
         get: (createdAtVal) => dateFormat(createdAtVal)
       },
-      reactions: [ReactionSchema],
-      //reactionCount: [ThoughtSchema]
+      reactions: [ReactionSchema]
     },
     {
       toJSON: {
