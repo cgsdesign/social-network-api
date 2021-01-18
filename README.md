@@ -3,9 +3,11 @@
 
 ## Description 
 
-For this project I worked in MongoDB, Express and Mongoose to create the backend for a social networking site. 
-* User routes include: Get, GetAll, Post, Put and Delete, and add and delete friends of users
-* Thought routes include: Get, GetAll, Post, Put and Delete, and ade and delete reactions 
+For this project I worked in MongoDB, Express and Mongoose to create the backend for a social networking site. This NoSQL database was created to handle large amounts of data with various points of intersection.
+
+* User routes include: Get, GetAll, Post, Put and Delete, and Post and Delete friends of users
+
+* Thought routes include: Get, GetAll, Post, Put and Delete, and Post and Delete reactions to thoughts
 
 ## Installation
 Download files from [this github repo](https://github.com/cgsdesign/E-CommerceBackEnd). Follow instructional videos to start. Make sure Mongo is running and to install both express and mongoose.
